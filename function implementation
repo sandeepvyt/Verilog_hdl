@@ -1,0 +1,37 @@
+------------function implementation switch level -------
+module fun(a,b,c,y);
+input a,b,c;
+output y;
+wire w1,w2,w3,w4;
+supply1 vdd;
+supply0 gnd;
+pmos p1(w1,vdd,a);
+pmos p2(w2,w1,b);
+pmos p3(w2,w1,w4);
+pmos p4(w4,vdd,c);
+pmos p5(y,vdd,w2);
+nmos n1(w2,gnd,a);
+nmos n2(w2,w3,b);
+nmos n3(w3,gnd,w4);
+nmos n4(w4,gnd,c);
+nmos n5(y,gnd,w2);
+endmodule
+--------tb-----------
+module fun_test;
+reg a,b,c;
+wire y;
+fun g1(a,b,c,y);
+initial
+begin
+a=0;b=0;c=0;#2
+a=0;b=0;c=1;#2
+a=0;b=1;c=0;#2
+a=0;b=0;c=0;#2
+a=0;b=1;c=1;#2
+a=1;b=0;c=0;#2
+a=1;b=0;c=1;#2
+a=1;b=1;c=0;#2
+a=1;b=1;c=1t;#2
+$stop;
+end
+endmodule
