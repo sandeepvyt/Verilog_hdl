@@ -1,0 +1,40 @@
+----------synch up t ff---------
+module tff1(t,clock,reset,q,qb);
+input t,clock,reset;
+output reg q,qb;
+always@(posedge clock)
+begin
+case({reset,t})
+2'b00 :q=q;
+2'b01 :q=~q;
+default: q=0;
+endcase
+qb<=~q;
+end
+endmodule
+-------
+module sync2(clock,reset,q);
+input clock, reset;
+output [1:0]q;
+wire x1,x2,x1bar,x2bar;
+tff1 t0(1,clock, reset,x1,x1bar);
+tff1 t1(q[0],clock, reset,x2,x2bar);
+assign q[0]=x1;
+assign q[1]=x2;
+endmodule
+------tb-----------
+module sync2ff_tb;
+reg clock,reset;
+wire [1:0]q;
+sync2 a1(clock,reset,q);
+initial begin
+clock=0;
+reset=1;
+# 20 reset=0;
+#200 reset=1;
+#20 $stop;
+end
+always
+#5clock =~clock;
+endmodule
+
