@@ -1,0 +1,32 @@
+----------xor---------------
+module cmosxor(a,b, out);
+input a,b;
+output out;
+wire abar, bbar, w1,w2,w3; supply1 vdd;
+supplye gnd;
+pmos pl(abar, vdd, a);
+nmos n1(abar, gnd, a); pmos p2 (bbar, vdd, b);
+nmos n2(bbar, gnd, b); pmos p3 (w1, vdd, abar);
+pmos p4(w1, vdd, bbar);
+pmos p5 (out, wl, a);
+pmos p6 (out, wl, b);
+nmos n3(out, w2, abar);
+nmos n4(out,w3, a);
+nmos n5 (w2, gnd, bbar);
+nmos n6 (w3, gnd, b);
+endmodule
+
+----------tb---------
+module cmosxor test;
+reg a,b;
+wire out;
+cmosxor X1(a,b,out);
+initial
+begin
+a = 0 ; b = 0 ; #2
+a = 0 ;b = 1; #2
+a = 1 ; b = 0 ;#2
+a = 1 ; b = 1 ;#2
+$stop;
+end
+endmodule
