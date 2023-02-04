@@ -1,0 +1,32 @@
+asynch
+---t ff down 
+module asyncounterdown(clk,y);
+input clk;
+output [2:0]y;
+wire w1,w2,w3,w4;
+tff_if gh ("1",clk,y[0],w1);
+not n1 (w2,w1);
+tff_if hg ("1",w2,y[1],w3);
+not n2 (w4,w3);
+tff_if hh ("1",w4,y[2]);
+endmodule
+----tff up---
+module asyncounterup(clk,y);
+input clk;
+output [2:0]y;
+wire w1,w2,w3;
+tff_if gh ("1",clk,y[0],w1);
+tff_if hg ("1",w1,y[1],w2);
+tff_if hh ("1",w2,y[2]);
+endmodule
+---------tb-----------------
+module asyncounterup_tb;
+reg clk;
+wire [2:0]y;
+asyncounterup gh (clk,y);
+initial
+begin
+clk = 0;
+end
+always #10 clk = ~clk;
+endmodule
