@@ -1,0 +1,26 @@
+----------encoder8*3-----------------
+module en83(a0,a1,a2,y0,y1,y2,y3,y4,y5,y6,y7);
+input y0,y1,y2,y3,y4,y5,y6,y7;
+output a0,a1,a2 ;
+assign a0=(y7|y5|y3|y1);
+assign a1=(y7|y6|y3|y2);
+assign a2=(y7|y6|y5|y4);
+endmodule 
+----------en8*3_tb----------
+module en83_tb;
+reg y0,y1,y2,y3,y4,y5,y6,y7;
+wire a0,a1,a2;
+en83 e1(a0,a1,a2,y0,y1,y2,y3,y4,y5,y6,y7);
+initial
+begin
+y0=1;y1=0;y2=0;y3=0;y4=0;y5=0;y6=0;y7=0;#20
+y0=0;y1=1;y2=0;y3=0;y4=0;y5=0;y6=0;y7=0;#20
+y0=0;y1=0;y2=1;y3=0;y4=0;y5=0;y6=0;y7=0;#20
+y0=0;y1=0;y2=0;y3=1;y4=0;y5=0;y6=0;y7=0;#20
+y0=0;y1=0;y2=0;y3=0;y4=1;y5=0;y6=0;y7=0;#20
+y0=0;y1=0;y2=0;y3=0;y4=0;y5=1;y6=0;y7=0;#20
+y0=0;y1=0;y2=0;y3=0;y4=0;y5=0;y6=1;y7=0;#20
+y0=0;y1=0;y2=0;y3=0;y4=0;y5=0;y6=0;y7=1;#20
+$stop;
+end
+endmodule
