@@ -1,0 +1,27 @@
+--------------d----------------
+module d_case(d,clock,q,qbar);
+input d,clock;
+output reg q=1,qbar=0;
+always@ (posedge clock)
+begin
+case(d)
+0:q=1'b0;
+1:q=1'b1;
+endcase
+qbar=~q;
+end
+endmodule
+------------tb---------
+module dcase_tb;
+reg d,clk;
+wire q,qbar;
+d_case aa(d,clk,q,qbar);
+initial
+begin
+clk=0;
+d=0;#100
+d=1;#100
+$stop;
+end
+always #10clk=~clk;
+endmodule
