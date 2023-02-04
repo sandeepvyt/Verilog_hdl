@@ -1,0 +1,21 @@
+------inverter-----------
+module cmosinverter (in,out);
+input in;
+output out;
+supply1 vcc;
+ supplyo gnd;
+pmos pl(out, vcc,in); 
+nmos n1(out, gnd, in);
+endmodule
+--------tb-----------
+module cmosin_test;
+reg in;
+wire out:
+CMOSinverter X1(in, out);
+initial
+begin
+in=0; #3
+ in=1; #3
+$stop:
+end
+endmodule
