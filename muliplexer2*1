@@ -1,0 +1,28 @@
+-----------mux2*1--------------
+module
+mux2x1 cmos (a,b,s, out);
+input a,b,s;
+output out;
+supply1 vcc;
+supplyo gnd;
+wire s1;
+pmos pl(s1,vcc,s);
+nmos n1(s1,and,s);
+cmos cl(outa, s1,s);
+cmos c2(out,b,s,s1);
+endmodule
+
+-----------tb----------
+module mux cmos test;
+reg a,b,s;
+wire out;
+mux2x1 cmos x1(a,b,s, out);
+initial
+begin
+a = 0 ; b = 0; s= 0; #5
+a = 0; b = 1; s = 0 #5
+ a = 1; b = 0 ; s= 0; #5
+a = 1 b = 1; s = 0 ; #5
+a = 0 ; b = 0 ; s= 1; #5
+$stop; end
+endmodule
