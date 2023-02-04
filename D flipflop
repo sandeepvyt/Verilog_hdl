@@ -1,0 +1,50 @@
+-----ff-------------------------------------------
+
+*d_flip_flop***
+module d_ff(d,reset,clock,q,qb);
+input d,reset,clock;
+output reg q,qb;
+always @ (posedge clock,posedge reset)
+begin
+if(reset)
+begin
+q = 0;
+qb =~q;
+end
+else if(d==0)
+begin
+q=0;
+qb=~q;
+end
+else if(d == 1)
+begin
+q=1;
+qb=~q;
+end
+end
+endmodule
+
+***d_flip_flop_test***
+module d_ff_tb;
+reg d,reset,clock;
+wire q ,qb;
+d_ff d1(d,reset,clock,q,qb);
+initial
+begin
+clock=0;
+reset=1;
+#10 reset=0;
+#100 reset=1;
+#10 $stop;
+end
+always
+#5clock=~clock;
+initial
+begin
+d=1; #25
+d=0; #25
+d=0; #25
+d=1; #25
+$stop;
+end
+endmodule
