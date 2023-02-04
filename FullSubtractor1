@@ -1,0 +1,31 @@
+-----------------------ful sub
+module fs(a,b,cin,d,bo);
+input a,b,cin;
+output d,bo;
+wire w1,w2,w3,w4,w5;
+xor (w2,a,b);
+xor (d,cin,w2);
+not (w1,a);
+and (w4,b,w1);
+not (w3,w2);
+and (w5,cin,w3);
+or (bo,w5,w4);
+endmodule
+----------------test for full sub---------
+module fs_test;
+reg a,b,cin;
+wire d,bo;
+fs fs1(a,b,cin,d,bo);
+initial
+begin
+a=0;b=0;cin=0;#2;
+a=0;b=0;cin=1;#2;
+a=0;b=1;cin=0;#2;
+a=0;b=1;cin=1;#2;
+a=1;b=0;cin=0;#2;
+a=1;b=0;cin=1;#2;
+a=1;b=1;cin=0;#2;
+a=1;b=1;cin=1;#2;
+$stop;
+end
+endmodule
