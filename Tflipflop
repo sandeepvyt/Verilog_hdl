@@ -1,0 +1,27 @@
+-------t--------------
+module t_case(t,clk,q,qbar);
+input t,clk;
+output reg q=1,qbar=0;
+always @ (posedge clk)
+begin
+case (t)
+0:q=q;
+1:q=~q;
+endcase
+qbar=~q;
+end
+endmodule
+
+module t_case_test;
+reg t,clk;
+wire q,qbar;
+t_case aa(t,clk,q,qbar);
+initial
+begin
+clk=0;
+t=0;#100
+t=1;#100
+$stop;
+end
+always #10clk=~clk;
+endmodule
