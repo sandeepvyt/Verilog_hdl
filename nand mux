@@ -1,0 +1,28 @@
+-------------mux using nand gates--------------
+module muxnand(a,b,s,y);
+input a,b,s;
+output y;
+wire w1,w2,w3;
+nand (w1,s,s);
+nand (w3,w1,a);
+nand (w2,s,b);
+nand (y,w3,w2);
+endmodule
+----------tb-----------
+module muxnand_test;
+reg a,b,s;
+wire y;
+muxnand h1(a,b,s,y);
+initial
+begin
+a=0;b=0;s=0;#2
+a=0;b=0;s=1;#2
+a=0;b=1;s=0;#2
+a=0;b=1;s=1;#2
+a=1;b=0;s=0;#2
+a=1;b=0;s=1;#2
+a=1;b=1;s=0;#2
+a=1;b=1;s=1;#2
+$stop;
+end
+endmodule
