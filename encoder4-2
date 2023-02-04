@@ -1,0 +1,21 @@
+module en42(a,b,c,d,x,y);
+input a,b,c,d;
+output x,y;
+assign x=a|c;
+assign y=b|c;
+endmodule
+
+module en42_tb;
+reg a,b,c,d;
+wire x,y;
+en42 e1 (a,b,c,d,x,y);
+initial
+begin
+a=0;b=0;c=0;d=0;#10
+a=1;b=0;c=0;d=0;#10
+a=0;b=0;c=1;d=0;#10
+a=0;b=0;c=0;d=1;#10
+a=0;b=1;c=0;d=0;#10
+$stop;
+end
+endmodule
