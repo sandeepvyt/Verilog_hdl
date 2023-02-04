@@ -1,0 +1,27 @@
+module full(a,b,cin,sum,carry);
+input a,b,cin;
+output  sum,carry;
+xor x1(w1,a,b);
+and a1(w2,a,b);
+xor x2(sum,w1,cin);
+and a2(w3,cin,w1);
+or o1(carry,w2,w3);
+endmodule
+/**********************testbench*************************/
+module full_tb;
+reg a,b,cin;
+wire sum,carry;
+full f1(a,b,cin,sum,carry);
+initial
+begin
+a=0;b=0;cin=0;#10
+a=0;b=0;cin=1;#10
+a=0;b=1;cin=0;#10
+a=0;b=1;cin=1;#10
+a=1;b=0;cin=0;#10
+a=1;b=0;cin=1;#10
+a=1;b=1;cin=0;#10
+a=1;b=1;cin=1;#10
+$stop;
+end 
+endmodule
