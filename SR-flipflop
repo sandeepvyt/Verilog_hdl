@@ -1,0 +1,29 @@
+module sr_case(s,r,clock,q,qbar);
+input s,r,clock;
+output reg q,qbar;
+always@ (posedge clock)
+begin
+case ({s,r})
+2'b00:q=1'b 0;
+2'b01:q=1'b 0;
+2'b10:q=1'b 1;
+2'b11:q=1'b x;
+endcase
+qbar=~q;
+end
+endmodule
+-----------tb------
+module sr_case_test;
+reg s,r,clock;
+wire q,qbar;
+sr_case uut (s,r,clock,q,qbar);
+initial begin
+clock = 0;
+s=0;r=0;#100
+s=0;r=1;#100
+s=1;r=0;#100
+s=1;r=1;#100
+$stop;
+end
+always #10 clock = ~clock;
+endmodule
