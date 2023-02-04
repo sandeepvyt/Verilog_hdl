@@ -1,0 +1,23 @@
+-----nandmux------
+module nandmux(a,b,y);
+input a,b;
+output y;
+wire w1;
+mux21 m1(1,0,a,w1);
+mux21 m2(1,w1,b,y);
+endmodule
+
+----------nandmuxtb---
+module nandmux_tb;
+reg a,b;
+wire y;
+nandmux n1(a,b,y);
+initial
+begin
+a=0;b=0;#10
+a=0;b=1;#10
+a=1;b=0;#10
+a=1;b=1;#10
+$stop;
+end 
+endmodule
